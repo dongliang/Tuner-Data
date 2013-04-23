@@ -1,10 +1,9 @@
 /*
-   TTDB
-   Tuner Text Data Base use for game static data read.
+   Tuner Data - Used to read the static data  in game development.
    e-mail : dongliang17@126.com  
 */
 using System.Diagnostics;
-namespace TTDB
+namespace TD
 {
     public class Singleton<T> where T : new()
     {

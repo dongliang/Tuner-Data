@@ -1,21 +1,20 @@
 ﻿/*
-   TTDB
-   Tuner Text Data Base use for game static data read.
+   Tuner Data - Used to read the static data  in game development.
    e-mail : dongliang17@126.com  
 */
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace TTDB
+namespace TD
 {
-    public class TDTable
+    public class Table
     {
-        public List<TDLine> m_DataLines;
+        public List<Line> m_DataLines;
         public Dictionary<string, int> m_FieldNameMap;
-        public List<TD_FIELD_TYPE> m_FieldsType;
+        public List<FIELD_TYPE> m_FieldsType;
         public List<string> m_Notes;
         private Dictionary<int, int> m_Index;
-        public TDTable(string text)
+        public Table(string text)
         {
             OpenFrom_Text(text);
         }
@@ -73,22 +72,22 @@ namespace TTDB
             }
 
             //create field type list. 建立类型列表
-            m_FieldsType = new List<TD_FIELD_TYPE>();
+            m_FieldsType = new List<FIELD_TYPE>();
             markIdx = _GetLineFromText(text, markIdx, DeadEnd, out tempLineStr);
             tempStrArray = _SplitStringToArray(tempLineStr, '\t');
             for (int i = 0; i < tempStrArray.Length; i++)
             {
                 if (tempStrArray[i] == "INT" || tempStrArray[i] == "int" || tempStrArray[i] == "Int")
                 {
-                    m_FieldsType.Add(TD_FIELD_TYPE.T_INT);
+                    m_FieldsType.Add(FIELD_TYPE.T_INT);
                 }
                 else if (tempStrArray[i] == "FLOAT" || tempStrArray[i] == "float" || tempStrArray[i] == "Float")
                 {
-                    m_FieldsType.Add(TD_FIELD_TYPE.T_FLOAT);
+                    m_FieldsType.Add(FIELD_TYPE.T_FLOAT);
                 }
                 else if (tempStrArray[i] == "STRING" || tempStrArray[i] == "string" || tempStrArray[i] == "String")
                 {
-                    m_FieldsType.Add(TD_FIELD_TYPE.T_STRING);
+                    m_FieldsType.Add(FIELD_TYPE.T_STRING);
                 }
                 else
                 {
@@ -104,7 +103,7 @@ namespace TTDB
 
             if (m_DataLines == null)
             {
-                m_DataLines = new List<TDLine>();
+                m_DataLines = new List<Line>();
             }
             if (m_Index == null)
             {
@@ -138,26 +137,26 @@ namespace TTDB
 
 
                 //create line.创建行
-                TDLine tempTDLine = new TDLine();
+                Line tempTDLine = new Line();
                 for (int i = 0; i < fieldsNum; i++)
                 {
-                    TDField newField = new TDField(0);
+                    Field newField = new Field(0);
                     switch (m_FieldsType[i])
                     {
-                        case TD_FIELD_TYPE.T_INT:
+                        case FIELD_TYPE.T_INT:
                             if (tempStrArray[i] != "")
                             {
-                                newField = new TDField(System.Convert.ToInt32(tempStrArray[i]));
+                                newField = new Field(System.Convert.ToInt32(tempStrArray[i]));
                             }
                             break;
-                        case TD_FIELD_TYPE.T_FLOAT:
+                        case FIELD_TYPE.T_FLOAT:
                             if (tempStrArray[i] != "")
                             {
-                                newField = new TDField(System.Convert.ToSingle(tempStrArray[i]));
+                                newField = new Field(System.Convert.ToSingle(tempStrArray[i]));
                             }
                             break;
-                        case TD_FIELD_TYPE.T_STRING:
-                            newField = new TDField(tempStrArray[i]);
+                        case FIELD_TYPE.T_STRING:
+                            newField = new Field(tempStrArray[i]);
                             break;
                         default:
                             Debug.Log("only 3 type, if see this code is wrong.");
@@ -218,14 +217,14 @@ namespace TTDB
             return m_FieldsType.Count;
         }
 
-        public TD_FIELD_TYPE GetFieldType(int field)
+        public FIELD_TYPE GetFieldType(int field)
         {
             return m_FieldsType[field];
         }
 
-        public TDField GetData(int index, int field)
+        public Field GetData(int index, int field)
         {
-            TDLine line = GetData(index);
+            Line line = GetData(index);
             if (line != null)
             {
                 return line.GetData(field);
@@ -233,7 +232,7 @@ namespace TTDB
             return null;
         }
 
-        public TDLine GetData(int index)
+        public Line GetData(int index)
         {
             if (m_Index != null)
             {
@@ -246,7 +245,7 @@ namespace TTDB
             return null;
         }
         //start 0. 从0开始
-        public TDLine GetDataByRowNum(int row)
+        public Line GetDataByRowNum(int row)
         {
             if (row >= 0 && row < GetRecordNum())
             {
@@ -257,7 +256,7 @@ namespace TTDB
 
         public object GetDataByNum(int row, int field)
         {
-            TDLine line = GetDataByRowNum(row);
+            Line line = GetDataByRowNum(row);
             if (line != null)
             {
                 return line.GetData(field);
@@ -265,25 +264,25 @@ namespace TTDB
             return null;
         }
 
-        public TDLine Search_First_Column_Equ(int field, object value)
+        public Line Search_First_Column_Equ(int field, object value)
         {
-            foreach (TDLine item_line in m_DataLines)
+            foreach (Line item_line in m_DataLines)
             {
                 switch (m_FieldsType[field])
                 {
-                    case TD_FIELD_TYPE.T_INT:
+                    case FIELD_TYPE.T_INT:
                         if ((int)value == (int)item_line.m_Fields[field].m_Value)
                         {
                             return item_line;
                         }
                         break;
-                    case TD_FIELD_TYPE.T_FLOAT:
+                    case FIELD_TYPE.T_FLOAT:
                         if ((float)value == (float)item_line.m_Fields[field].m_Value)
                         {
                             return item_line;
                         }
                         break;
-                    case TD_FIELD_TYPE.T_STRING:
+                    case FIELD_TYPE.T_STRING:
                         if ((string)value == (string)item_line.m_Fields[field].m_Value)
                         {
                             return item_line;
@@ -296,7 +295,7 @@ namespace TTDB
 
         public void SetData(int index, int field, object value)
         {
-            TDField tempField = GetData(index, field);
+            Field tempField = GetData(index, field);
             tempField.m_Value = value;
         }
 
@@ -333,16 +332,16 @@ namespace TTDB
             //output third line: field type. 输出第三行:类型
             for (int i = 0; i < m_FieldsType.Count; i++)
             {
-                TD_FIELD_TYPE tempType = GetFieldType(i);
+                FIELD_TYPE tempType = GetFieldType(i);
                 switch (tempType)
                 {
-                    case TD_FIELD_TYPE.T_INT:
+                    case FIELD_TYPE.T_INT:
                         tempStr += "int";
                         break;
-                    case TD_FIELD_TYPE.T_FLOAT:
+                    case FIELD_TYPE.T_FLOAT:
                         tempStr += "float";
                         break;
-                    case TD_FIELD_TYPE.T_STRING:
+                    case FIELD_TYPE.T_STRING:
                         tempStr += "string";
                         break;
                 }
@@ -356,20 +355,20 @@ namespace TTDB
                 }
             }
             //output data. 输出数据
-            foreach (TDLine item_line in m_DataLines)
+            foreach (Line item_line in m_DataLines)
             {
                 for (int i = 0; i < m_FieldsType.Count; i++)
                 {
                     // 
                     switch (m_FieldsType[i])
                     {
-                        case TD_FIELD_TYPE.T_INT:
+                        case FIELD_TYPE.T_INT:
                             tempStr += ((int)item_line.m_Fields[i].m_Value).ToString();
                             break;
-                        case TD_FIELD_TYPE.T_FLOAT:
+                        case FIELD_TYPE.T_FLOAT:
                             tempStr += ((float)item_line.m_Fields[i].m_Value).ToString();
                             break;
-                        case TD_FIELD_TYPE.T_STRING:
+                        case FIELD_TYPE.T_STRING:
                             tempStr += ((string)item_line.m_Fields[i].m_Value).ToString();
                             break;
                     }

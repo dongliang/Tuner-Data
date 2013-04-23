@@ -1,16 +1,15 @@
 ﻿/*
-   TTDB
-   Tuner Text Data Base use for game static data read.
+   Tuner Data - Used to read the static data  in game development.
    e-mail : dongliang17@126.com  
 */
 using UnityEngine;
-using TTDB;
+using TD;
 
-public class TTDBMonoTunner : MonoBehaviour
+public class TDMonoTunner : MonoBehaviour
 {
-    TDLine m_TDLine = null;
+    Line m_TDLine = null;
 
-    public TDLine TDLine
+    public Line Line
     {
         get { return m_TDLine; }
         set { m_TDLine = value; }
@@ -22,7 +21,7 @@ public class TTDBMonoTunner : MonoBehaviour
         get { return m_TableName; }
         set { m_TableName = value; }
     }
-    public void SetDataSource(string tableName, TDLine line)
+    public void SetDataSource(string tableName, Line line)
     {
         m_TableName = tableName;
         m_TDLine = line;
@@ -33,6 +32,6 @@ public class TTDBMonoTunner : MonoBehaviour
         {
             return;
         }
-        TDRoot.Instance.Save(m_TableName);
+        Root.Instance.Save(m_TableName);
     }
 }

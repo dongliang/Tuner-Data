@@ -1,21 +1,20 @@
 ﻿/*
-   TTDB
-   Tuner Text Data Base use for game static data read.
+   Tuner Data - Used to read the static data  in game development.
    e-mail : dongliang17@126.com  
 */
-namespace TTDB
+namespace TD
 {
     /// <summary>
     /// field type
     /// </summary>
-    public enum TD_FIELD_TYPE
+    public enum FIELD_TYPE
     {
         T_INT = 0,
         T_FLOAT = 1,
         T_STRING = 2,
         T_INVALID = -1
     };
-    public class TDUtil
+    public class Util
     {
         /// <summary>
         /// make sure path Has been created.

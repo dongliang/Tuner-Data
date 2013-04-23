@@ -1,6 +1,5 @@
 ﻿/*
-   TTDB
-   Tuner Text Data Base use for game static data read.
+   Tuner Data - Used to read the static data  in game development.
    e-mail : dongliang17@126.com  
 */
 using System;
@@ -8,14 +7,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
-namespace TTDB
+namespace TD
 {
-    public class TDFile
+    public class DataSourceFile
     {
         public string m_Path = null;
-        public TDTable m_Table = null;
+        public Table m_Table = null;
 
-        public TDFile(string fullPath)
+        public DataSourceFile(string fullPath)
         {
             Open(fullPath);
         }
@@ -26,7 +25,7 @@ namespace TTDB
             {                
                 string text = File.ReadAllText(fullPath);
                 m_Path = fullPath;
-                m_Table = new TDTable(text);
+                m_Table = new Table(text);
             }
             catch (System.Exception ex)
             {
@@ -85,16 +84,16 @@ namespace TTDB
             return m_Table.GetFieldNum();
         }
 
-        public TD_FIELD_TYPE GetFieldType(int field)
+        public FIELD_TYPE GetFieldType(int field)
         {
             if (m_Table == null)
             {
-                return TD_FIELD_TYPE.T_INVALID;
+                return FIELD_TYPE.T_INVALID;
             }
             return m_Table.GetFieldType(field);
         }
 
-        public TDField GetData(int index, int field)
+        public Field GetData(int index, int field)
         {
             if (m_Table == null)
             {
@@ -103,7 +102,7 @@ namespace TTDB
             return m_Table.GetData(index, field);
         }
 
-        public TDLine GetData(int index)
+        public Line GetData(int index)
         {
             if (m_Table == null)
             {
@@ -113,7 +112,7 @@ namespace TTDB
 
         }
         //start 0
-        public TDLine GetDataByRowNum(int row)
+        public Line GetDataByRowNum(int row)
         {
             if (m_Table == null)
             {
@@ -132,7 +131,7 @@ namespace TTDB
             return m_Table.GetDataByNum(row, field);
         }
 
-        public TDLine Search_First_Column_Equ(int field, object value)
+        public Line Search_First_Column_Equ(int field, object value)
         {
             if (m_Table == null)
             {

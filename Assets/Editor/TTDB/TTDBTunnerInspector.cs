@@ -1,18 +1,18 @@
-﻿/*  
-    Tuner Text Data Base 
-    e-mail : dongliang17@126.com
- */
+﻿/*
+   Tuner Data - Used to read the static data  in game development.
+   e-mail : dongliang17@126.com  
+*/
 using UnityEditor;
 using UnityEngine;
-using TTDB;
+using TD;
 
-[CustomEditor(typeof(TTDBMonoTunner))]
+[CustomEditor(typeof(TDMonoTunner))]
 public class TTDBTunnerInspector : Editor
 {
     public override void OnInspectorGUI()
     {
-        TTDBMonoTunner tempTunner = target as TTDBMonoTunner;
-        int lineIndex = (int)tempTunner.TDLine.m_Fields[0].m_Value;
+        TDMonoTunner tempTunner = target as TDMonoTunner;
+        int lineIndex = (int)tempTunner.Line.m_Fields[0].m_Value;
 
         GUILayout.BeginHorizontal();
         {
@@ -41,25 +41,25 @@ public class TTDBTunnerInspector : Editor
 
         //数据字段
 
-        for (int i = 1; i < tempTunner.TDLine.m_Fields.Count; i++)
+        for (int i = 1; i < tempTunner.Line.m_Fields.Count; i++)
         {
-            TDField item_field = tempTunner.TDLine.m_Fields[i];
-            TD_FIELD_TYPE item_fieldType = TDRoot.Instance.GetFieldType(tempTunner.TableName, i);
-            string item_filedName = TDRoot.Instance.GetFiledName(tempTunner.TableName, i);
+            Field item_field = tempTunner.Line.m_Fields[i];
+            FIELD_TYPE item_fieldType = Root.Instance.GetFieldType(tempTunner.TableName, i);
+            string item_filedName = Root.Instance.GetFiledName(tempTunner.TableName, i);
             GUILayout.BeginHorizontal();
             {
                 GUILayout.Label(item_filedName + "：");
 
                 switch (item_fieldType)
                 {
-                    case TD_FIELD_TYPE.T_INT:
+                    case FIELD_TYPE.T_INT:
                         item_field.m_Value = EditorGUILayout.IntField((int)item_field.m_Value);
                         break;
-                    case TD_FIELD_TYPE.T_FLOAT:
+                    case FIELD_TYPE.T_FLOAT:
                         item_field.m_Value = EditorGUILayout.FloatField((float)item_field.m_Value);
 
                         break;
-                    case TD_FIELD_TYPE.T_STRING:
+                    case FIELD_TYPE.T_STRING:
                         item_field.m_Value = EditorGUILayout.TextField((string)item_field.m_Value);
                         break;
                 }
