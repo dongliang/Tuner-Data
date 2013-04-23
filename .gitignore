@@ -164,3 +164,10 @@ pip-log.txt
 Library
 ProjectSettings
 Temp
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp-Editor-vs.csproj
+Assembly-CSharp-vs.csproj
+TTDB.sln
+TTDB-csharp.sln
+TTDB-csharp.suo
+Assembly-CSharp.csproj
