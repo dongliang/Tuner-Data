@@ -1,18 +1,18 @@
-﻿/*
-   Tuner Data - Used to read the static data  in game development.
-   e-mail : dongliang17@126.com  
-*/
+﻿/*  
+    Tuner Text Data Base 
+    e-mail : dongliang17@126.com
+ */
 using UnityEditor;
 using UnityEngine;
 using TD;
 
-[CustomEditor(typeof(TDMonoTunner))]
+[CustomEditor(typeof(TTDBMonoTunner))]
 public class TTDBTunnerInspector : Editor
 {
     public override void OnInspectorGUI()
     {
-        TDMonoTunner tempTunner = target as TDMonoTunner;
-        int lineIndex = (int)tempTunner.Line.m_Fields[0].m_Value;
+        TTDBMonoTunner tempTunner = target as TTDBMonoTunner;
+        int lineIndex = (int)tempTunner.TDLine.m_Fields[0].m_Value;
 
         GUILayout.BeginHorizontal();
         {
@@ -21,7 +21,7 @@ public class TTDBTunnerInspector : Editor
             GUILayout.FlexibleSpace();
         }
         GUILayout.EndHorizontal();
-        //数据表名
+        //Table Name
         GUILayout.BeginHorizontal();
         {
 
@@ -30,7 +30,7 @@ public class TTDBTunnerInspector : Editor
             GUILayout.FlexibleSpace();
         }
         GUILayout.EndHorizontal();
-        //索引ID
+        //Index ID
         GUILayout.BeginHorizontal();
         {
             GUILayout.Label("Index：");
@@ -39,13 +39,17 @@ public class TTDBTunnerInspector : Editor
         }
         GUILayout.EndHorizontal();
 
-        //数据字段
+        //Data Field
 
-        for (int i = 1; i < tempTunner.Line.m_Fields.Count; i++)
+        for (int i = 1; i < tempTunner.TDLine.m_Fields.Count; i++)
         {
-            Field item_field = tempTunner.Line.m_Fields[i];
-            FIELD_TYPE item_fieldType = Root.Instance.GetFieldType(tempTunner.TableName, i);
-            string item_filedName = Root.Instance.GetFiledName(tempTunner.TableName, i);
+            Table tempTable = TDRoot.Instance.getTable(tempTunner.TableName);
+            Field item_field = tempTunner.TDLine.m_Fields[i];
+            FIELD_TYPE item_fieldType = tempTable.GetFieldType( i);
+
+
+
+            string item_filedName = tempTable.GetFieldName(i);
             GUILayout.BeginHorizontal();
             {
                 GUILayout.Label(item_filedName + "：");
@@ -64,7 +68,7 @@ public class TTDBTunnerInspector : Editor
                         break;
                 }
 
-                //编辑器
+                //Editor
                 GUILayout.FlexibleSpace();
             }
             GUILayout.EndHorizontal();
@@ -77,7 +81,7 @@ public class TTDBTunnerInspector : Editor
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("Save File"))
             {
-                tempTunner.SaveFile();
+             //   tempTunner.SaveFile();
             }
             GUILayout.FlexibleSpace();
         }

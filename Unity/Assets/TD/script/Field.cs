@@ -1,6 +1,6 @@
 ﻿/*
-   Tuner Data - Used to read the static data  in game development.
-   e-mail : dongliang17@126.com  
+   Tuner Data -  Read Static Data in Game Development.
+   e-mail : dongliang17@126.com
 */
 namespace TD
 {
