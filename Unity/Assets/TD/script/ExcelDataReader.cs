@@ -16,7 +16,7 @@ namespace TD
     {
         string m_Path;
         string m_FileName;
-        string m_suffix;
+        //string m_suffix;
         int StartRow = 3;
         HSSFWorkbook m_Hssfworkbook = null;
         List<Row> mRowList = new List<Row>();
@@ -34,19 +34,15 @@ namespace TD
         }
         public void Init(String a_path)
         {
-            Debug.Log(a_path);
+            Debug.Log("read excel path : " + a_path);
             path = a_path;
             string[] sArr1 = path.Split(new char[] { '/' });
             string str1 = sArr1[sArr1.Length - 1];
             string[] sArr2 = str1.Split(new char[] { '.' });
             m_FileName = sArr2[0];
-            m_suffix = sArr2[1];
-
-
-            //加载数据头
+            //m_suffix = sArr2[1];
+            InitHssf();
             LoadSchema();
-
-            //加载数据体
             LoadData();
         }
 
@@ -66,12 +62,9 @@ namespace TD
         {
             m_Schema = new Schema();
             m_Schema.ClassName = m_FileName;
-
-            InitHssf();
-
             HSSFSheet sheet = (HSSFSheet)m_Hssfworkbook.GetSheetAt(0);
             HSSFRow row0 = (HSSFRow)sheet.GetRow(0);
-            HSSFRow row1 = (HSSFRow)sheet.GetRow(1);
+           // HSSFRow row1 = (HSSFRow)sheet.GetRow(1);
             HSSFRow row2 = (HSSFRow)sheet.GetRow(2);
 
 
@@ -102,24 +95,17 @@ namespace TD
                 m_Schema.AddDefine(tempDefine);
             }
         }
-
-        //load Data To Reader.
         void LoadData()
         {
-
             if (m_Schema == null)
             {
                 return;
             }
-
-            InitHssf();
             HSSFSheet sheet = (HSSFSheet)m_Hssfworkbook.GetSheetAt(0);
 
             int CurrentRowIndex = 0;
 
             System.Collections.IEnumerator rows = sheet.GetRowEnumerator();
-
-
             while (rows.MoveNext())
             {
                 HSSFRow row = (HSSFRow)rows.Current;
@@ -177,8 +163,6 @@ namespace TD
                 CurrentRowIndex++;
             }
         }
-
-
         public Schema ReadSchema()
         {
             return m_Schema;
@@ -193,12 +177,8 @@ namespace TD
             }
             else
             {
-                Debug.Log(44);
                 return null;
             }
-
-
-
         }
     }
 }

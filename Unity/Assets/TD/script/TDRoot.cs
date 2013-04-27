@@ -14,17 +14,13 @@ namespace TD
     {
 
         Dictionary<string, Table> m_TableMap = new Dictionary<string, Table>();
+        Dictionary<string, string> m_FileMap = new Dictionary<string, string>();
 
         string m_DataTunnerContainerName = "TTDB_DataTuners";
-        /// <summary>
-        /// Open a Data File or a Folder.
-        /// The Path is DataPath and SchemaPath.
-        /// </summary>
-        /// <param name="path">path</param>
-        /// <returns></returns>
+
+        //file name is table name.
         public bool Open(string a_path)
-        {
-            //生成读取器
+        {            
             IDataReader reader = TDFactory.Instance.GetDataReader(a_path);
             Schema tempSchema = reader.ReadSchema();
             if (tempSchema == null)
@@ -32,11 +28,61 @@ namespace TD
                 return false;
             }
             Table tempTable = new Table(reader);
-            m_TableMap.Add(tempSchema.ClassName, tempTable);
+            if (m_TableMap.ContainsKey(tempSchema.ClassName))
+            {
+                m_TableMap[tempSchema.ClassName] = tempTable;
+            }
+            else
+            {
+                m_TableMap.Add(tempSchema.ClassName, tempTable);
+            }
+
+            if (m_FileMap.ContainsKey(tempSchema.ClassName))
+            {
+                m_FileMap[tempSchema.ClassName] = a_path;
+            }
+            else
+            {
+                m_FileMap.Add(tempSchema.ClassName, a_path);
+            }
+            
+          
             return true;
         }
+        //file name is table name.
+        public bool Save(string name, E_DataFile_Type type)
+        {
+            //get path and change the suffix.
+            string path = null;
+            m_FileMap.TryGetValue(name, out path);
+            if (path != null)
+            {
+                string[] sArr2 = path.Split(new char[] { '.' });
+                path = sArr2[0] + "." + TDFactory.Instance.GetFileSuffix(type);
+                return SaveAs(name,path);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //file name is table name.
+        public bool SaveAs(string a_name,string a_path)
+        {
+            IDataWriter writer = TDFactory.Instance.GetDataWriter(a_path);
+            Table table = null;
+            m_TableMap.TryGetValue(a_name, out table);
+            if (table != null)
+            {
+               return table.Write(writer);
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-       public Table getTable(string name)
+        public Table getTable(string name)
         {
             Table temp = null;
             m_TableMap.TryGetValue(name, out temp);

@@ -20,7 +20,6 @@ namespace TD
         Dictionary<int, FieldDefine> m_Define_IndexMap = new Dictionary<int, FieldDefine>();
         Dictionary<string, FieldDefine> m_Define_NameMap = new Dictionary<string, FieldDefine>();
 
-
         public FieldDefine AddDefine(FieldDefine a_FieldDefine)
         {
             m_Define_IndexMap.Add(a_FieldDefine.Index, a_FieldDefine);
@@ -35,7 +34,6 @@ namespace TD
             return temp;
         }
 
-
         public FieldDefine GetDefine(int index)
         {
             FieldDefine temp = null;
@@ -47,12 +45,6 @@ namespace TD
         {
             get { return m_Define_IndexMap.Count; }
 
-    }
-
-
-
-
-
-
+        }
     }
 }

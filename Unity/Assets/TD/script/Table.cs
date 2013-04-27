@@ -9,9 +9,9 @@ namespace TD
 {
     public class Table
     {
-        public List<Row> m_DataRows = new List<Row>();//*************
+        public List<Row> m_DataRows = new List<Row>();
         public Schema m_Schema = null;//***********
-        private Dictionary<int, int> m_IndexMap = new Dictionary<int, int>();//*************
+        private Dictionary<int, int> m_IndexMap = new Dictionary<int, int>();
         public Table(IDataReader reader)
         {
             m_Schema = reader.ReadSchema();
@@ -96,7 +96,7 @@ namespace TD
             }
             return null;
         }
-        //备用
+        
         public string GetFieldName(int field)
         {
             return m_Schema.GetDefine(field).FieldName;
@@ -105,6 +105,11 @@ namespace TD
         public FIELD_TYPE GetFieldType(int field)
         {
             return m_Schema.GetDefine(field).FieldType;
+        }
+
+        public bool Write(IDataWriter writer)
+        {
+           return writer.Write(m_Schema,m_DataRows.ToArray());
         }
     }
 }
