@@ -10,6 +10,7 @@ using UnityEngine;
 
 namespace TD
 {
+    //tableName = ClassName = FileName
     public class TDRoot : Singleton<TDRoot>
     {
 
@@ -20,7 +21,7 @@ namespace TD
 
         //file name is table name.
         public bool Open(string a_path)
-        {            
+        {
             IDataReader reader = TDFactory.Instance.GetDataReader(a_path);
             Schema tempSchema = reader.ReadSchema();
             if (tempSchema == null)
@@ -45,8 +46,8 @@ namespace TD
             {
                 m_FileMap.Add(tempSchema.ClassName, a_path);
             }
-            
-          
+
+
             return true;
         }
         //file name is table name.
@@ -59,7 +60,7 @@ namespace TD
             {
                 string[] sArr2 = path.Split(new char[] { '.' });
                 path = sArr2[0] + "." + TDFactory.Instance.GetFileSuffix(type);
-                return SaveAs(name,path);
+                return SaveAs(name, path);
             }
             else
             {
@@ -67,14 +68,14 @@ namespace TD
             }
         }
         //file name is table name.
-        public bool SaveAs(string a_name,string a_path)
+        public bool SaveAs(string a_name, string a_path)
         {
             IDataWriter writer = TDFactory.Instance.GetDataWriter(a_path);
             Table table = null;
             m_TableMap.TryGetValue(a_name, out table);
             if (table != null)
             {
-               return table.Write(writer);
+                return table.Write(writer);
             }
             else
             {
@@ -102,6 +103,17 @@ namespace TD
             tempTunner_go.transform.parent = container_go.transform;
             TTDBMonoTunner tunner = tempTunner_go.AddComponent<TTDBMonoTunner>();
             tunner.SetDataSource(tableName, tempRow);
+        }
+
+        public void GenerateStruct(string tableName, string path)
+        {
+            Table table = getTable(tableName);
+            if (table == null)
+            {
+                return;
+            }
+            Schema schema = table.m_Schema;
+            StructGen.Instance.Generate(schema, path);
         }
     }
 }

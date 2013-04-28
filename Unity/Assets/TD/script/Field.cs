@@ -11,5 +11,19 @@ namespace TD
             m_Value = value;
         }
         public object m_Value;
+
+        public int GetInt()
+        {
+            return (int)m_Value;
+        }
+
+        public float GetFloat()
+        {
+            return (float)m_Value;
+        }
+        public string GetString()
+        {
+            return m_Value.ToString();
+        }
     }
 }

@@ -96,7 +96,7 @@ namespace TD
             }
             return null;
         }
-        
+
         public string GetFieldName(int field)
         {
             return m_Schema.GetDefine(field).FieldName;
@@ -109,7 +109,19 @@ namespace TD
 
         public bool Write(IDataWriter writer)
         {
-           return writer.Write(m_Schema,m_DataRows.ToArray());
+            return writer.Write(m_Schema, m_DataRows.ToArray());
+        }
+
+        public T GetStruct<T>(int index) where T : ITDStruct, new()
+        {
+            Row row = GetRow(index);
+            T temp = new T();
+            if (row != null)
+            {              
+                temp.Init(row);
+               
+            }
+            return temp;
         }
     }
 }

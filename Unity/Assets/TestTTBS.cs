@@ -16,8 +16,15 @@ public class TestTTBS : MonoBehaviour {
         {
             Debug.Log("Success to save binary file.");
         }
+
         TDRoot.Instance.Open(Application.dataPath + "/TD/data/test.byte");
         TDRoot.Instance.AddDataTunner("test", 210250);
+
+        TDStruct.test testObj = TDRoot.Instance.getTable("test").GetStruct<TDStruct.test>(210250);
+        Debug.Log(testObj.JieShouRenId);
+
+        TDRoot.Instance.GenerateStruct("test", Application.dataPath + "/");
+        
     }
 	
 	// Update is called once per frame
