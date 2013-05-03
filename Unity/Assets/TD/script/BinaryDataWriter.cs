@@ -143,7 +143,9 @@ namespace TD
             if (res)
             {
                 m_stream.Close();
+                m_stream = null;
                 m_Writer.Close();
+                m_Writer = null;
             }
             return res;
         }

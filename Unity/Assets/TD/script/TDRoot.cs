@@ -22,6 +22,10 @@ namespace TD
         //file name is table name.
         public bool Open(string a_path)
         {
+            if (!string.IsNullOrEmpty(a_path))
+            {
+                a_path = a_path.Replace(@"\", @"/");
+            }
             IDataReader reader = TDFactory.Instance.GetDataReader(a_path);
             Schema tempSchema = reader.ReadSchema();
             if (tempSchema == null)
@@ -67,9 +71,32 @@ namespace TD
                 return false;
             }
         }
+
+        public bool Save(string name, string folder, E_DataFile_Type type)
+        {
+            if (!string.IsNullOrEmpty(folder))
+            {
+                folder = folder.Replace(@"\", @"/");
+            }
+            if (folder != null)
+            {
+                return SaveAs(name, folder + name + "." + TDFactory.Instance.GetFileSuffix(type));
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
         //file name is table name.
         public bool SaveAs(string a_name, string a_path)
         {
+            if (!string.IsNullOrEmpty(a_path))
+            {
+                a_path = a_path.Replace(@"\", @"/");
+            }
             IDataWriter writer = TDFactory.Instance.GetDataWriter(a_path);
             Table table = null;
             m_TableMap.TryGetValue(a_name, out table);
@@ -107,6 +134,10 @@ namespace TD
 
         public void GenerateStruct(string tableName, string path)
         {
+            if (!string.IsNullOrEmpty(path))
+            {
+                path = path.Replace(@"\", @"/");
+            }
             Table table = getTable(tableName);
             if (table == null)
             {
