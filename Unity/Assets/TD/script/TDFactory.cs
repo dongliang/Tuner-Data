@@ -2,6 +2,7 @@
    Tuner Data -  Read Static Data in Game Development.
    e-mail : dongliang17@126.com
 */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,12 @@ namespace TD
             IDataReader tempReader = null;
             switch (suffix)
             {
+
+#if USE_EXCEL
                 case "xls":
                     tempReader = new ExcelDataReader(path);
-                    break;
+                    break;          
+#endif
                 case "byte":
                     tempReader = new BinaryDataReader(path);
                     break;
