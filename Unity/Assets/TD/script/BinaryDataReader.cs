@@ -4,8 +4,6 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using UnityEngine;
 
@@ -36,7 +34,7 @@ namespace TD
         }
         public void Init(String a_path)
         {
-            Debug.Log("read binary path : "+a_path);
+            //Debug.Log("read binary path : "+a_path);
             path = a_path;
             string[] sArr1 = path.Split(new char[] { '/' });
             string str1 = sArr1[sArr1.Length - 1];
@@ -150,7 +148,7 @@ namespace TD
                             break;
                         default:
                             tempField = new Field(0);
-                            Debug.Log("Undefined Field Type");
+                            //Debug.Log("Undefined Field Type");
                             break;
                     }
                     tempRow.m_Fields.Add(tempField);

@@ -40,8 +40,7 @@ namespace TD
             string str1 = sArr1[sArr1.Length - 1];
             string[] sArr2 = str1.Split(new char[] { '.' });
             string FileName = sArr2[0];
-            string suffix = sArr2[sArr2.Length - 1];
-            return FileName;
+            return FileName; 
         }
 
         public static string GetFileSuffix(string path)
@@ -51,7 +50,6 @@ namespace TD
             string[] sArr1 = path.Split(new char[] { '/' });
             string str1 = sArr1[sArr1.Length - 1];
             string[] sArr2 = str1.Split(new char[] { '.' });
-            string FileName = sArr2[0];
             string suffix = sArr2[sArr2.Length - 1];
             return suffix;
         }
@@ -77,7 +75,6 @@ namespace TD
                 foreach (FileInfo fileInfo in FolderInfo.GetFiles())
                 {
                     string path = fileInfo.FullName;
-                    string FileName = GetFileName(path);
                     string suffix = GetFileSuffix(path);
                     if (suffix == a_suffix)
                     {

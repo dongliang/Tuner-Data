@@ -9,14 +9,7 @@ public class TestTTBS : MonoBehaviour {
 
 	// Use this for initialization 
     void Start()
-    {
-        TDRoot.Instance.Open(Application.dataPath + "/TD/data/test.xls");
-        bool saveRes = TDRoot.Instance.Save("test", E_DataFile_Type.binary);
-        if (saveRes)
-        {
-            Debug.Log("Success to save binary file.");
-        }
-
+    {       
         TDRoot.Instance.Open(Application.dataPath + "/TD/data/test.byte");
         TDRoot.Instance.AddDataTunner("test", 210250);
 

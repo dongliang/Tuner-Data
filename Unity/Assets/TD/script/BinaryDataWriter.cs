@@ -4,7 +4,6 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 using UnityEngine;
@@ -36,7 +35,7 @@ namespace TD
         }
         public void Init(String a_path)
         {
-            Debug.Log("write binary path : "+a_path);
+           // Debug.Log("write binary path : "+a_path);
             path = a_path;
             //string[] sArr1 = path.Split(new char[] { '/' });
             //string str1 = sArr1[sArr1.Length - 1];
@@ -118,7 +117,7 @@ namespace TD
                             m_Writer.Write(row.GetField(i).m_Value.ToString());
                             break;
                         case FIELD_TYPE.T_INVALID:
-                            Debug.LogError("Wrong Field Type.");
+                            //Debug.LogError("Wrong Field Type.");
                             break;
                         default:
                             break;
@@ -134,7 +133,7 @@ namespace TD
             res = WriteSchema(schema, rows.Length);
             if (!res)
             {
-                Debug.Log("Write Error");
+                //Debug.Log("Write Error");
                 return false;
             }
             res = WriteData(rows, schema);
