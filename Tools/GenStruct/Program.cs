@@ -14,8 +14,17 @@ namespace GenStruct
             {
                 return;
             }
+          
             string SourcePath = args[0];
             string TargetPath = args[1];
+
+            Console.WriteLine("-----Tuner Data generate model struct(.cs file) : -----");
+            Console.WriteLine("");
+            Console.WriteLine("1.Path:");
+            Console.WriteLine("source path : " + SourcePath);
+            Console.WriteLine("target path : " + TargetPath);
+            Console.WriteLine("");
+
 
             List<string> tables = new List<string>();
             string[] pathArr = Util.GetAllFilePath(SourcePath, "xls", true);
@@ -26,11 +35,13 @@ namespace GenStruct
                 tables.Add(fileName);
                 TDRoot.Instance.Open(path);
             }
-
+            Console.WriteLine("2.generate files:");
             foreach (string item in tables)
             {
                 TDRoot.Instance.GenerateStruct(item, TargetPath);
+                Console.WriteLine("file : " + TargetPath +"TD_"+ item + ".cs");
             }
+            Console.Read();
         }
     }
 }

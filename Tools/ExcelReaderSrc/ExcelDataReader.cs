@@ -33,7 +33,7 @@ namespace TD
         }
         public void Init(String a_path)
         {
-            Debug.Log("read excel path : " + a_path);
+           // Debug.Log("read excel path : " + a_path);
             path = a_path;
             string[] sArr1 = path.Split(new char[] { '/' });
             string str1 = sArr1[sArr1.Length - 1];
