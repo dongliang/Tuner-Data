@@ -10,14 +10,14 @@ Features：
 
 Example:
   
-  1.open a data file.
-  
-   TDRoot.Instance.Open(Application.dataPath + "/TD/data/test.byte");
-   
-  2.get the model object.
-  
-   TDStruct.test testObj = TDRoot.Instance.getTable("test").GetStruct<TDStruct.test>(210250);
-  
-  3.Generate Model Class ( .cs file)
-  
-   TDRoot.Instance.GenerateStruct("test", Application.dataPath + "/");
+      1.open a data file.
+      
+       TDRoot.Instance.Open(Application.dataPath + "/TD/data/test.byte");
+       
+      2.get the model object.
+      
+       TDStruct.test testObj = TDRoot.Instance.getTable("test").GetStruct<TDStruct.test>(210250);
+      
+      3.Generate Model Class ( .cs file)
+      
+       TDRoot.Instance.GenerateStruct("test", Application.dataPath + "/");
