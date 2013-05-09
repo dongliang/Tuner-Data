@@ -12,11 +12,11 @@ Example:
   
    1.open a data file.
    
-       TDRoot.Instance.Open(Application.dataPath + "/TD/data/test.byte");
+       TD.TDRoot.Instance.Open(Application.dataPath + "/TD/data/test.byte");
        
    2.Generate Model Class ( .cs file)
    
-       TDRoot.Instance.GenerateStruct("test", Application.dataPath + "/");
+       TD.TDRoot.Instance.GenerateStruct("test", Application.dataPath + "/");
        
    3.get the model object.
    
