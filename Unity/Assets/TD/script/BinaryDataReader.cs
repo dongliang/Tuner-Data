@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace TD
+namespace TunerData
 {
     public class BinaryDataReader : IDataReader
     {

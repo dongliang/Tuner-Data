@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using Tuner;
 
-namespace TD
+namespace TunerData
 {
     public class StructGen : Singleton<StructGen>
     {

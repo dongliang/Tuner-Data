@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TD
+namespace TunerData
 {
     public class Schema
     {

@@ -3,7 +3,7 @@
    e-mail : dongliang17@126.com
 */
 using System.Diagnostics;
-namespace TD
+namespace Tuner
 {
     public class Singleton<T> where T : new()
     {

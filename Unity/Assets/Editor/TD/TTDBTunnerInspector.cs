@@ -4,7 +4,7 @@
  */
 using UnityEditor;
 using UnityEngine;
-using TD;
+using TunerData;
 
 [CustomEditor(typeof(TTDBMonoTunner))]
 public class TTDBTunnerInspector : Editor

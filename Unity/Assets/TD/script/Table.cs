@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace TD
+namespace TunerData
 {
     public class Table
     {

@@ -6,8 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using Tuner;
 
-namespace TD
+namespace TunerData
 {
     //tableName = ClassName = FileName
     public class TDRoot : Singleton<TDRoot>
