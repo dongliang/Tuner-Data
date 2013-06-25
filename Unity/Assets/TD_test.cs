@@ -1,4 +1,4 @@
-﻿using TD;
+﻿using Tuner.Data;
 namespace TDStruct
 {
 public class test : ITDStruct
