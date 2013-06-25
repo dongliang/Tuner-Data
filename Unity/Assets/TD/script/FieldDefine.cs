@@ -4,7 +4,7 @@
 */
 using UnityEngine;
 using System.Collections;
-namespace TunerData
+namespace Tuner.Data
 {
     public class FieldDefine
     {

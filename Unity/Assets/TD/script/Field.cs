@@ -2,7 +2,7 @@
    Tuner Data -  Read Static Data in Game Development.
    e-mail : dongliang17@126.com
 */
-namespace TunerData
+namespace Tuner.Data
 {
     public class Field
     {

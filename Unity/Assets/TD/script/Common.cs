@@ -4,7 +4,7 @@
 */
 using System.Collections.Generic;
 using System.IO;
-namespace TunerData
+namespace Tuner.Data
 {
     /// <summary>
     /// field type

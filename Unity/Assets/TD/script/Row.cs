@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace TunerData
+namespace Tuner.Data
 {
     public class Row
     {

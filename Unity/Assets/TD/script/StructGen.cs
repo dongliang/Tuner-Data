@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 using Tuner;
 
-namespace TunerData
+namespace Tuner.Data
 {
     public class StructGen : Singleton<StructGen>
     {

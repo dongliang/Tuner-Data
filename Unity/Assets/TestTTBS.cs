@@ -4,7 +4,7 @@
 */
 using UnityEngine;
 using System.Collections;
-using TunerData;
+using Tuner.Data;
 public class TestTTBS : MonoBehaviour {
 
 	// Use this for initialization 

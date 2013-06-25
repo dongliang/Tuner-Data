@@ -3,7 +3,7 @@
    e-mail : dongliang17@126.com
 */
 using System;
-namespace TunerData
+namespace Tuner.Data
 {
     public interface IDataReader
     {

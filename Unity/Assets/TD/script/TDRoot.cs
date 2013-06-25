@@ -8,7 +8,7 @@ using System.Text;
 using UnityEngine;
 using Tuner;
 
-namespace TunerData
+namespace Tuner.Data
 {
     //tableName = ClassName = FileName
     public class TDRoot : Singleton<TDRoot>

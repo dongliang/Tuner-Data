@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using Tuner;
 
-namespace TunerData
+namespace Tuner.Data
 {
     public enum E_DataFile_Type
     {

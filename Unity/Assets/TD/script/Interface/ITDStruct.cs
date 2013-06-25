@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TunerData
+namespace Tuner.Data
 {
 	public interface ITDStruct
 	{
